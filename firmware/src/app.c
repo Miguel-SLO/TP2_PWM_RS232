@@ -125,7 +125,6 @@ void APP_Initialize ( void )
     DRV_TMR0_Initialize();
     DRV_TMR1_Initialize();
     DRV_TMR2_Initialize();
-    DRV_TMR3_Initialize();
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */

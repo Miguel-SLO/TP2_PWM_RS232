@@ -37,7 +37,6 @@ void GPWM_Initialize(S_pwmSettings *pData)
     DRV_TMR0_Start();
     DRV_TMR1_Start();
     DRV_TMR2_Start();
-    DRV_TMR3_Start();
    
 }
 
