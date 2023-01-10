@@ -66,18 +66,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 /* This is the driver static object . */
 DRV_USART_OBJ  gDrvUSART0Obj ;
 
-typedef enum {
-    USART_RECEIVE_FIFO_3B4FULL = 0x02,
-    USART_RECEIVE_FIFO_HALF_FULL = 0x01,
-    USART_RECEIVE_FIFO_ONE_CHAR = 0x00
-}USART_RECEIVE_INTR_MODE;
-
-typedef enum {
-    USART_TRANSMIT_FIFO_NOT_FULL = 0x00,
-    USART_TRANSMIT_FIFO_IDLE = 0x01,
-    USART_TRANSMIT_FIFO_EMPTY = 0x02
-}USART_TRANSMIT_INTR_MODE;
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Instance 0 static driver functions

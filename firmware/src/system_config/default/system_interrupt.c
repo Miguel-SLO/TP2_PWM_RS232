@@ -90,9 +90,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4AUTO) IntHandlerDrvTmrInstance0(void)
     else
     {
         APP_UpdateState(APP_STATE_SERVICE_TASKS);
-        GPWM_GetSettings(&PWMData);
-        GPWM_DispSettings(&PWMData);
-        GPWM_ExecPWM(&PWMData);
+        
     }
     BSP_LEDOff(BSP_LED_0);
     
