@@ -105,8 +105,15 @@ void GPWM_GetSettings(S_pwmSettings *pData)
 
 
 // Affichage des information en exploitant la structure
-void GPWM_DispSettings(S_pwmSettings *pData)
+void GPWM_DispSettings(S_pwmSettings *pData, int Remote)
 {
+    // Affichage remote
+    lcd_gotoxy(1,1);
+    if(Remote == 1)
+        printf_lcd("** Remote Settings");
+    else
+        printf_lcd("Local Settings");
+    
     // Affichage de la vitesse signée du moteur
     lcd_gotoxy(1,2);
     printf_lcd("SpeedSetting %3d", pData -> SpeedSetting);

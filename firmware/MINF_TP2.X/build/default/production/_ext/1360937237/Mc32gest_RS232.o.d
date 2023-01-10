@@ -1,5 +1,9 @@
-build/default/production/_ext/327000265/drv_usart_static.o: \
- ../src/system_config/default/framework/driver/usart/src/drv_usart_static.c \
+build/default/production/_ext/1360937237/Mc32gest_RS232.o: \
+ ../src/Mc32gest_RS232.c \
+ ../src/system_config/default/system_definitions.h \
+ ../../../../../../framework/system/common/sys_common.h \
+ ../../../../../../framework/system/common/sys_module.h \
+ ../../../../../../framework/driver/oc/drv_oc.h \
  ../src/system_config/default/system_config.h \
  ../../../../../../bsp/pic32mx_skes/bsp.h \
  ../../../../../../framework/peripheral/ports/plib_ports.h \
@@ -53,10 +57,6 @@ build/default/production/_ext/327000265/drv_usart_static.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteControl_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
- ../src/system_config/default/system_definitions.h \
- ../../../../../../framework/system/common/sys_common.h \
- ../../../../../../framework/system/common/sys_module.h \
- ../../../../../../framework/driver/oc/drv_oc.h \
  ../../../../../../framework/driver/driver_common.h \
  ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
  ../../../../../../framework/system/devcon/sys_devcon.h \
@@ -245,7 +245,17 @@ build/default/production/_ext/327000265/drv_usart_static.o: \
  ../../../../../../framework/system/ports/sys_ports.h \
  ../../../../../../framework/system/ports/sys_ports_definitions.h \
  ../src/app.h ../../../../../../bsp/pic32mx_skes/Mc32DriverAdc.h \
- ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h ../src/gestPWM.h
+ ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h ../src/gestPWM.h \
+ ../src/app.h ../src/GesFifoTh32.h ../src/Mc32gest_RS232.h \
+ ../src/Mc32CalCrc16.h
+
+../src/system_config/default/system_definitions.h:
+
+../../../../../../framework/system/common/sys_common.h:
+
+../../../../../../framework/system/common/sys_module.h:
+
+../../../../../../framework/driver/oc/drv_oc.h:
 
 ../src/system_config/default/system_config.h:
 
@@ -352,14 +362,6 @@ build/default/production/_ext/327000265/drv_usart_static.o: \
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_CounterAsyncWriteInProgress_Default.h:
 
 ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h:
-
-../src/system_config/default/system_definitions.h:
-
-../../../../../../framework/system/common/sys_common.h:
-
-../../../../../../framework/system/common/sys_module.h:
-
-../../../../../../framework/driver/oc/drv_oc.h:
 
 ../../../../../../framework/driver/driver_common.h:
 
@@ -742,3 +744,11 @@ build/default/production/_ext/327000265/drv_usart_static.o: \
 ../../../../../../bsp/pic32mx_skes/Mc32DriverLcd.h:
 
 ../src/gestPWM.h:
+
+../src/app.h:
+
+../src/GesFifoTh32.h:
+
+../src/Mc32gest_RS232.h:
+
+../src/Mc32CalCrc16.h:

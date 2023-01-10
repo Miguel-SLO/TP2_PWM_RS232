@@ -54,6 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 
 #include "app.h"
+#include "Mc32gest_RS232.h"
 
 
 // *****************************************************************************
@@ -142,6 +143,8 @@ void APP_Initialize ( void )
 void APP_Tasks ( void )
 {
     
+    int CommStatus;
+    
     //TABLEAU LEDS
     static BSP_LED Tab_LEDS [8] =
     {
@@ -175,7 +178,10 @@ void APP_Tasks ( void )
             printf_lcd("Julien Decrausaz");
             lcd_gotoxy(1,3);
             printf_lcd("Einar Farinas");
-
+            
+            // Initialisation du FIFO
+            InitFifoComm();
+            
             //Initialisation de l'AD
             BSP_InitADC10();
             
@@ -199,10 +205,28 @@ void APP_Tasks ( void )
         }      
 
         case APP_STATE_SERVICE_TASKS:
-        {
+        { 
+            // Réception param. remote
+            CommStatus = GetMessage(&PWMData);
+            // Lecture pot.
+            if (CommStatus == 0) // local ?
+            GPWM_GetSettings(&PWMData); // local
+            else 
+            GPWM_GetSettings(&PWMDataToSend); // remote
+            // Affichage
+            GPWM_DispSettings(&PWMData, CommStatus);
+            // Execution PWM et gestion moteur
+            GPWM_ExecPWM(&PWMData);
+            // Envoi valeurs
+            if (CommStatus == 0) // local ?
+            SendMessage(&PWMData); // local
+            else 
+            SendMessage(&PWMDataToSend); // remote
+
             appData.state = APP_STATE_WAIT;
             break;
         }
+
 
         /* TODO: implement your application state machine.*/
         
