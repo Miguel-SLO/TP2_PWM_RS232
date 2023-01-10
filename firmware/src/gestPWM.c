@@ -21,6 +21,7 @@
 #include "driver/tmr/drv_tmr_static.h"
 
 S_pwmSettings PWMData;      // pour les settings
+S_pwmSettings PWMDataToSend;
 
 void GPWM_Initialize(S_pwmSettings *pData)
 {
