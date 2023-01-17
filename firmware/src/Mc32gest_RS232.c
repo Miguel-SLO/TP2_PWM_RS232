@@ -82,9 +82,13 @@ int GetMessage(S_pwmSettings *pData)
     // Lecture et décodage fifo réception
     // ...
     
+    // Treat only if reached minimal message size
+    if(GetReadSize(&descrFifoRX) >= MESS_SIZE){
+        GetCharFromFifo()
+    }
     
     // Gestion controle de flux de la réception
-    if(GetWriteSpace ( &descrFifoRX) >= (2*MESS_SIZE)) {
+    if(GetWriteSpace (&descrFifoRX) >= (2*MESS_SIZE)) {
         // autorise émission par l'autre
         RS232_RTS = 0;
     }
