@@ -92,18 +92,18 @@ SYS_MODULE_OBJ DRV_USART0_Initialize(void)
 
     /* We set the receive interrupt mode to receive an interrupt whenever FIFO
        is not empty */
-    PLIB_USART_InitializeOperation(USART_ID_1,
-            USART_RECEIVE_FIFO_ONE_CHAR,
-            USART_TRANSMIT_FIFO_EMPTY,
-            USART_ENABLE_TX_RX_USED);
+    PLIB_USART_InitializeOperation( USART_ID_1,
+                                    USART_RECEIVE_FIFO_ONE_CHAR,
+                                    USART_TRANSMIT_FIFO_EMPTY,
+                                    USART_ENABLE_TX_RX_USED);
 
     /* Get the USART clock source value*/
     clockSource = SYS_CLK_PeripheralFrequencyGet ( CLK_BUS_PERIPHERAL_1 );
 
     /* Set the baud rate and enable the USART */
     PLIB_USART_BaudSetAndEnable(USART_ID_1,
-            clockSource,
-            57600);  /*Desired Baud rate value*/
+                                clockSource,
+                                57600);  /*Desired Baud rate value*/
 
     /* Clear the interrupts to be on the safer side*/
     SYS_INT_SourceStatusClear(INT_SOURCE_USART_1_TRANSMIT);
