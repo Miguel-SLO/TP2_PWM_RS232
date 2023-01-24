@@ -108,6 +108,7 @@ void SendMessage(S_pwmSettings *pData)
         // Initilisation valeur CRC
         TxCRC.val = 0xFFFF;
         
+        
         // Calcul du CRC16
         TxCRC.val = updateCRC16(TxCRC.val, TxMess.Start);
         TxCRC.val = updateCRC16(TxCRC.val, TxMess.Speed);
@@ -151,11 +152,11 @@ void SendMessage(S_pwmSettings *pData)
                  PLIB_INT_SourceIsEnabled(INT_ID_0, INT_SOURCE_USART_1_ERROR) ) {
         /* Clear pending interrupt */
         PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_ERROR);
-        // Traitement de l'erreur à la réception.
+        // Traitement de l'erreur à la réception. 
     }
    
 
-    // Is this an RX interrupt ?
+    // Is this a RX interrupt ?
     if ( PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE) &&
                  PLIB_INT_SourceIsEnabled(INT_ID_0, INT_SOURCE_USART_1_RECEIVE) ) {
 
@@ -165,13 +166,23 @@ void SendMessage(S_pwmSettings *pData)
         if ( (UsartStatus & (USART_ERROR_PARITY |
                              USART_ERROR_FRAMING | USART_ERROR_RECEIVER_OVERRUN)) == 0) {
 
+            
+            
             // Traitement RX à faire ICI
+            
+            
+            
             // Lecture des caractères depuis le buffer HW -> fifo SW
 			//  (pour savoir s'il y a une data dans le buffer HW RX : PLIB_USART_ReceiverDataIsAvailable())
 			//  (Lecture via fonction PLIB_USART_ReceiverByteReceive())
             // ...
+            PLIB_USART_ReceiverDataIsAvailable(USART_ID_1);
+            PLIB_USART_ReceiverByteReceive(USART_ID_1);
+                     
             
-                         
+            
+            
+            
             LED4_W = !LED4_R; // Toggle Led4
             // buffer is empty, clear interrupt flag
             PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
@@ -185,6 +196,7 @@ void SendMessage(S_pwmSettings *pData)
 
         
         // Traitement controle de flux reception à faire ICI
+        
         // Gerer sortie RS232_RTS en fonction de place dispo dans fifo reception
         // ...
 
@@ -192,7 +204,7 @@ void SendMessage(S_pwmSettings *pData)
     } // end if RX
 
     
-    // Is this an TX interrupt ?
+    // Is this a TX interrupt ?
     if ( PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT) &&
                  PLIB_INT_SourceIsEnabled(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT) ) {
 
