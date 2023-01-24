@@ -59,7 +59,7 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o: \
  ../../../../../../framework/driver/oc/drv_oc.h \
  ../../../../../../framework/driver/driver_common.h \
  ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -365,7 +365,7 @@ build/default/production/_ext/639803181/sys_clk_pic32mx.o: \
 
 ../src/system_config/default/framework/driver/oc/drv_oc_static.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 

@@ -95,13 +95,13 @@ int GetMessage(S_pwmSettings *pData)
         
         // Recupère caractère jusqu'à obtenir Start
         do{
-            GetCharFromFifo(&descrFifoRX, fifoRX[fifoPos]);
+            GetCharFromFifo(&descrFifoRX, &fifoRX[fifoPos]);
         }while(fifoRX[fifoPos] != STX_code);
         
         // Récupère les 4 autres caractères du message
-        for(uint8_t fifoPos = 1; fifoPos < MESS_SIZE; fifoPos++)
+        for(fifoPos = 1; fifoPos < MESS_SIZE; fifoPos++)
         {
-            GetCharFromFifo(&descrFifoRX, fifoRX[fifoPos]);
+            GetCharFromFifo(&descrFifoRX, &fifoRX[fifoPos]);
         }
         
         // Calcul du CRC
@@ -189,9 +189,8 @@ void SendMessage(S_pwmSettings *pData)
 // !!!!!!!!
  void __ISR(_UART_1_VECTOR, ipl5AUTO) _IntHandlerDrvUsartInstance0(void)
 {
-    USART_ERROR UsartStatus;    
-
-
+    USART_ERROR UsartStatus;
+    
     // Marque début interruption avec Led3
     LED3_W = 1;
     
@@ -202,7 +201,6 @@ void SendMessage(S_pwmSettings *pData)
         PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_ERROR);
         // Traitement de l'erreur à la réception.
     }
-   
 
     // Is this an RX interrupt ?
     if ( PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE) &&
@@ -239,7 +237,6 @@ void SendMessage(S_pwmSettings *pData)
 
         
     } // end if RX
-
     
     // Is this an TX interrupt ?
     if ( PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT) &&
