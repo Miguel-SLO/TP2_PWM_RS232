@@ -77,14 +77,59 @@ void InitFifoComm(void)
 int GetMessage(S_pwmSettings *pData)
 {
     int commStatus = 0;
+    uint8_t fifoPos = 0;
+    uint8_t usedSize = 0;
+    U_manip16 RxCRC;
+    
     
     // Traitement de réception à introduire ICI
     // Lecture et décodage fifo réception
     // ...
+   
+    usedSize = GetReadSize(&descrFifoRX);
     
-    // Treat only if reached minimal message size
-    if(GetReadSize(&descrFifoRX) >= MESS_SIZE){
-        GetCharFromFifo()
+    // Traite uniquement si message à recevoir
+    if(usedSize >= MESS_SIZE){
+        
+        // Recupère caractère jusqu'à obtenir Start
+        do{
+            GetCharFromFifo(&descrFifoRX, fifoRX[fifoPos]);
+        }while(fifoRX[fifoPos] != STX_code);
+        
+        // Récupère les 4 autres caractères du message
+        for(uint8_t fifoPos = 1; fifoPos < MESS_SIZE; fifoPos++)
+        {
+            GetCharFromFifo(&descrFifoRX, fifoRX[fifoPos]);
+        }
+        
+        // Calcul du CRC
+        RxCRC.val = 0xFFFF;
+        updateCRC16(RxCRC.val, fifoRX[0]);
+        updateCRC16(RxCRC.val, fifoRX[1]);
+        updateCRC16(RxCRC.val, fifoRX[2]);
+        
+        // Comparaison de CRC obtenu et calcule
+        if(RxCRC.shl.msb == fifoRX[3] && RxCRC.shl.lsb == fifoRX[4])
+        {
+            // Communication reussie
+            commStatus = true;
+            
+            // Sauvegarde des valeurs
+            RxMess.Start = fifoRX[0];
+            RxMess.Speed = fifoRX[1];
+            RxMess.Angle = fifoRX[2];
+            RxMess.LsbCrc = fifoRX[3];
+            RxMess.MsbCrc = fifoRX[4];
+            
+        }
+        else
+        {
+            // Erreur de communication
+            commStatus = false;
+        }
+        
+        
+        
     }
     
     // Gestion controle de flux de la réception
