@@ -189,7 +189,12 @@ void SendMessage(S_pwmSettings *pData)
 // !!!!!!!!
  void __ISR(_UART_1_VECTOR, ipl5AUTO) _IntHandlerDrvUsartInstance0(void)
 {
-    USART_ERROR UsartStatus;
+     uint8_t freeSize, TXsize;
+     int8_t charFifo;
+     int8_t i_cts = 0;
+     BOOL TxBuffFull;
+     
+     USART_ERROR UsartStatus;
     
     // Marque début interruption avec Led3
     LED3_W = 1;
@@ -217,7 +222,11 @@ void SendMessage(S_pwmSettings *pData)
 			//  (pour savoir s'il y a une data dans le buffer HW RX : PLIB_USART_ReceiverDataIsAvailable())
 			//  (Lecture via fonction PLIB_USART_ReceiverByteReceive())
             // ...
-            
+            while(PLIB_USART_ReceiverDataIsAvailable(USART_ID_1))
+            {
+               charFifo = PLIB_USART_ReceiverByteReceive(USART_ID_1);
+               PutCharInFifo(&descrFifoRX, charFifo);
+            }
                          
             LED4_W = !LED4_R; // Toggle Led4
             // buffer is empty, clear interrupt flag
@@ -234,6 +243,10 @@ void SendMessage(S_pwmSettings *pData)
         // Traitement controle de flux reception à faire ICI
         // Gerer sortie RS232_RTS en fonction de place dispo dans fifo reception
         // ...
+        freeSize = GetWriteSpace(&descrFifoRX);
+        if(freeSize <= 6){
+            RS232_RTS = 1;
+        }
 
         
     } // end if RX
@@ -244,7 +257,22 @@ void SendMessage(S_pwmSettings *pData)
 
         // Traitement TX à faire ICI
         // Envoi des caractères depuis le fifo SW -> buffer HW
-            
+        
+        TXsize = GetReadSize(&descrFifoTX);
+        i_cts = RS232_CTS;
+        
+        TxBuffFull = PLIB_USART_TransmitterBufferIsFull(USART_ID_1);
+        
+        if((i_cts == 0) && (TXsize > 0) && TxBuffFull == false){
+            do{
+                GetCharFromFifo(&descrFifoTX, &charFifo);
+                PLIB_USART_TransmitterByteSend(USART_ID_1, charFifo);
+                i_cts = RS232_CTS;
+                TXsize = GetReadSize(&descrFifoTX);
+                TxBuffFull = PLIB_USART_TransmitterBufferIsFull(USART_ID_1);
+            }while((i_cts == 0) && (TXsize > 0) && TxBuffFull == false);
+        }
+        
         // Avant d'émettre, on vérifie 3 conditions :
         //  Si CTS = 0 autorisation d'émettre (entrée RS232_CTS)
         //  S'il y a un caratères à émettre dans le fifo

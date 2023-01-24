@@ -115,7 +115,8 @@ void GPWM_DispSettings(S_pwmSettings *pData, int Remote)
         printf_lcd("Local Settings");
     
     // Affichage de la vitesse signée du moteur
-    lcd_gotoxy(1,2);
+    lcd_ClearLine(2);
+    lcd_gotoxy(1,2);    
     printf_lcd("SpeedSetting %3d", pData -> SpeedSetting);
     // Affichage de la vitesse absolute du moteur
     lcd_gotoxy(1,3);

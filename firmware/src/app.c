@@ -173,11 +173,13 @@ void APP_Tasks ( void )
             // Line 2 : Julien Decrausaz
             // Line 3 : Einar Farinas
             lcd_gotoxy(1,1); //  (COLONNE, LIGNE)
-            printf_lcd("TP1 PWM 2022-2023");
+            printf_lcd("Local settings");
             lcd_gotoxy(1,2);
-            printf_lcd("Julien Decrausaz");
+            printf_lcd("TP2 PWM&RS232 22-23");
             lcd_gotoxy(1,3);
-            printf_lcd("Einar Farinas");
+            printf_lcd("Julien Decrausaz");
+            lcd_gotoxy(1,4);
+            printf_lcd("Miguel Santos");
             
             // Initialisation du FIFO
             InitFifoComm();
