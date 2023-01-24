@@ -226,7 +226,7 @@
         <Name dnOrder="0">system_interrupt.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default</Path>
         <Checksum dnOrder="2">7810EA36985F4A716D231C114DCF359E</Checksum>
-        <ProjectFileChecksum dnOrder="3">3B4B72E5B6BEA43A1AA7767A41ECB4F5</ProjectFileChecksum>
+        <ProjectFileChecksum dnOrder="3">84851F649962A56B3A6B68F32AF0C804</ProjectFileChecksum>
       </Template>
       <Template dnOrder="8">
         <Name dnOrder="0">drv_oc_mapping.c</Name>
@@ -242,6 +242,7 @@
         <Name dnOrder="0">drv_usart_static.c</Name>
         <Path dnOrder="1">Source&amp;#160;Files/app/system_config/default/framework/driver/usart/src</Path>
         <Checksum dnOrder="2">7FECF1CCAEB411E06BF6AE1692E7FE3E</Checksum>
+        <ProjectFileChecksum dnOrder="3">24B9984DB71967BF74B5705A6283A306</ProjectFileChecksum>
       </Template>
       <Template dnOrder="11">
         <Name dnOrder="0">system_init.c</Name>
@@ -318,11 +319,11 @@
     </Templates>
     <CompilerItems dnOrder="2">
       <C32 dnOrder="0">
-        <Include dnOrder="0" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP2_PWM_RS232\firmware\src"/>
-        <Include dnOrder="1" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP2_PWM_RS232\firmware\src\system_config\default"/>
-        <Include dnOrder="2" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP2_PWM_RS232\firmware\src\default"/>
+        <Include dnOrder="0" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP2_PWM-R232\firmware\src"/>
+        <Include dnOrder="1" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP2_PWM-R232\firmware\src\system_config\default"/>
+        <Include dnOrder="2" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP2_PWM-R232\firmware\src\default"/>
         <Include dnOrder="3" value="C:\microchip\harmony\v2_06\framework"/>
-        <Include dnOrder="4" value="C:\microchip\harmony\v2_06\apps\MINF\TP\TP2_PWM_RS232\firmware\src\system_config\default\framework"/>
+        <Include dnOrder="4" value="C:\microchip\harmony\v2_06\apps\MINF\TP\MINF_TP2_PWM-R232\firmware\src\system_config\default\framework"/>
         <Include dnOrder="5" value="../../../../../../bsp/pic32mx_skes"/>
       </C32>
     </CompilerItems>

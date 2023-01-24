@@ -23,6 +23,8 @@ typedef union {
                 uint8_t msb;} shl;
 } U_manip16;
 
+U_manip16 TxCRC;
+
 
 // Definition pour les messages
 #define MESS_SIZE  5
@@ -146,10 +148,29 @@ void SendMessage(S_pwmSettings *pData)
 {
     int8_t freeSize;
     
-    // Traitement émission à introduire ICI
-    // Formatage message et remplissage fifo émission
-    // ...
-    
+    // Test si place pour écrire 1 message
+    freeSize = GetWriteSpace(&descrFifoTX);
+    if (freeSize >= MESS_SIZE)
+    {
+        // Formatage message et remplissage fifo émission
+        
+        // Initilisation valeur CRC
+        TxCRC.val = 0xFFFF;
+        
+        // Calcul du CRC16
+        TxCRC.val = updateCRC16(TxCRC.val, TxMess.Start);
+        TxCRC.val = updateCRC16(TxCRC.val, TxMess.Speed);
+        TxCRC.val = updateCRC16(TxCRC.val, TxMess.Angle);
+        
+        // Dépose le message dans le fifo
+        PutCharInFifo(&descrFifoTX, TxMess.Start);
+        PutCharInFifo(&descrFifoTX, TxMess.Speed);
+        PutCharInFifo(&descrFifoTX, TxMess.Angle);
+              
+        // Décomposition du CRC16 en MSB & LSB
+        PutCharInFifo(&descrFifoTX, TxCRC.shl.msb);
+        PutCharInFifo(&descrFifoTX, TxCRC.shl.lsb);
+    }
     
     // Gestion du controle de flux
     // si on a un caractère à envoyer et que CTS = 0
