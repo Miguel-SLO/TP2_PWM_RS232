@@ -59,7 +59,7 @@ build/default/production/_ext/1360937237/Mc32gest_RS232.o: \
  ../../../../../../framework/peripheral/tmr/processor/../templates/tmr_TimerOperationMode_Default.h \
  ../../../../../../framework/driver/driver_common.h \
  ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
- ../../../../../../framework/system/devcon/sys_devcon.h \
+ ../src/system_config/default/framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -367,7 +367,7 @@ build/default/production/_ext/1360937237/Mc32gest_RS232.o: \
 
 ../src/system_config/default/framework/driver/oc/drv_oc_static.h:
 
-../../../../../../framework/system/devcon/sys_devcon.h:
+../src/system_config/default/framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 

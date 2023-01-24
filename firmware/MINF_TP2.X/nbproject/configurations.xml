@@ -5,6 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="f3" displayName="app" projectFiles="true">
+        <logicalFolder name="f2" displayName="New Folder 2" projectFiles="true">
+        </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1" displayName="default" projectFiles="true">
             <logicalFolder name="f1" displayName="framework" projectFiles="true">
@@ -65,8 +67,8 @@
             <itemPath>../../../../../../framework/driver/tmr/drv_tmr_compatibility.h</itemPath>
             <itemPath>../../../../../../framework/driver/tmr/tmr_definitions_pic32m.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f3" displayName="usart" projectFiles="true">
-            <logicalFolder name="f1" displayName="src" projectFiles="true">
+          <logicalFolder name="usart" displayName="usart" projectFiles="true">
+            <logicalFolder name="src" displayName="src" projectFiles="true">
               <itemPath>../../../../../../framework/driver/usart/src/drv_usart_variant_mapping.h</itemPath>
             </logicalFolder>
             <itemPath>../../../../../../framework/driver/usart/drv_usart.h</itemPath>
@@ -264,7 +266,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/system_config/default;../src/default;../../../../../../framework;../src/system_config/default/framework;../../../../../../bsp/pic32mx_skes"/>
+                  value="../src;../src/system_config/default;../src/default;../src/system_config/default/framework;../../../../../../framework;../../../../../../bsp/pic32mx_skes"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
