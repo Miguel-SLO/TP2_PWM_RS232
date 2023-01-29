@@ -181,11 +181,16 @@ void APP_Tasks ( void )
             lcd_gotoxy(1,4);
             printf_lcd("Miguel Santos");
             
-            // Initialisation du FIFO
-            InitFifoComm();
+            
             
             //Initialisation de l'AD
             BSP_InitADC10();
+            
+            // Initialisation du FIFO
+            InitFifoComm();
+            
+            //Initialisation de UART (USART_ID_1)
+            DRV_USART0_Initialize();
             
             //Eteindre toutes les LEDs
             for (i = 0; i < 8; i++)
@@ -210,22 +215,26 @@ void APP_Tasks ( void )
         { 
             // Réception param. remote
             CommStatus = GetMessage(&PWMData);
+            
             // Lecture pot.
             if (CommStatus == 0) // local ?
-            GPWM_GetSettings(&PWMData); // local
+                GPWM_GetSettings(&PWMData); // local
             else 
-            GPWM_GetSettings(&PWMDataToSend); // remote
+                GPWM_GetSettings(&PWMDataToSend); // remote
+            
             // Affichage
             GPWM_DispSettings(&PWMData, CommStatus);
             // Execution PWM et gestion moteur
             GPWM_ExecPWM(&PWMData);
+            
             // Envoi valeurs
             if (CommStatus == 0) // local ?
-            SendMessage(&PWMData); // local
+                SendMessage(&PWMData); // local
             else 
-            SendMessage(&PWMDataToSend); // remote
+                SendMessage(&PWMDataToSend); // remote
 
             appData.state = APP_STATE_WAIT;
+            
             break;
         }
 
