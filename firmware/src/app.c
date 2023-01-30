@@ -218,23 +218,24 @@ void APP_Tasks ( void )
             
             // Lecture pot.
             if (CommStatus == 0) // local ?
-                GPWM_GetSettings(&PWMData); // local
-            else 
-                GPWM_GetSettings(&PWMDataToSend); // remote
+            {
+                // Récupération des données en local
+                GPWM_GetSettings(&PWMData);
+                SendMessage(&PWMData); // local                
+            }
+            else    // Remote ?
+            {
+                // Récupération des données
+                GPWM_GetSettings(&PWMDataToSend);
+                SendMessage(&PWMDataToSend); // remote
+            }
             
-            // Affichage
+            // Affichage sur le LCD
             GPWM_DispSettings(&PWMData, CommStatus);
             // Execution PWM et gestion moteur
             GPWM_ExecPWM(&PWMData);
-            
-            // Envoi valeurs
-            if (CommStatus == 0) // local ?
-                SendMessage(&PWMData); // local
-            else 
-                SendMessage(&PWMDataToSend); // remote
 
-            appData.state = APP_STATE_WAIT;
-            
+            appData.state = APP_STATE_WAIT;            
             break;
         }
 

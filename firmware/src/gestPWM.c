@@ -87,20 +87,13 @@ void GPWM_GetSettings(S_pwmSettings *pData)
     // conversion  
     ValADC1 = (Moy1*198) / 1023;
     
-    PWMData.SpeedSetting = ValADC1 - 99;
-    if(PWMData.SpeedSetting < 0)
-    {
-        PWMData.absSpeed = PWMData.SpeedSetting * -1;
-    }
-    else
-    {
-        PWMData.absSpeed = PWMData.SpeedSetting;
-    }
+    pData->SpeedSetting = ValADC1 - 99;
+    pData->absSpeed = abs(pData->SpeedSetting);
     
     // conversion  
-    PWMData.absAngle = (Moy2*180) / 1023;
+    pData->absAngle = (Moy2*180) / 1023;
     
-    PWMData.AngleSetting = PWMData.absAngle - 90;
+    pData->AngleSetting = pData->absAngle - 90;
 }
 
 
@@ -108,6 +101,7 @@ void GPWM_GetSettings(S_pwmSettings *pData)
 void GPWM_DispSettings(S_pwmSettings *pData, int Remote)
 {
     // Affichage remote
+    lcd_ClearLine(1);
     lcd_gotoxy(1,1);
     if(Remote == 1)
         printf_lcd("** Remote Settings");
@@ -138,7 +132,7 @@ void GPWM_ExecPWM(S_pwmSettings *pData)
     // Bit8 de pData.SpeedSetting = au signe de la vitesse
     // Masquage du bit8 dans pData.SpeedSetting pour savoir la direction
     // Si bit8 = 1 -> direction CCW , sinon direction CW
-    if(pData -> SpeedSetting > 0)
+    if(pData->SpeedSetting > 0)
     {
         PLIB_PORTS_PinClear( PORTS_ID_0, PORT_CHANNEL_D, AIN1_HBRIDGE_BIT);
         PLIB_PORTS_PinSet( PORTS_ID_0, PORT_CHANNEL_D, AIN2_HBRIDGE_BIT);
