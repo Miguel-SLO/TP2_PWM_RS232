@@ -59,7 +59,7 @@ build/default/production/_ext/327000265/drv_usart_static_byte_model.o: \
  ../../../../../../framework/driver/oc/drv_oc.h \
  ../../../../../../framework/driver/driver_common.h \
  ../src/system_config/default/framework/driver/oc/drv_oc_static.h \
- ../src/system_config/default/framework/system/devcon/sys_devcon.h \
+ ../../../../../../framework/system/devcon/sys_devcon.h \
  ../../../../../../framework/system/system.h \
  ../../../../../../framework/system/clk/sys_clk.h \
  ../../../../../../framework/peripheral/osc/plib_osc.h \
@@ -365,7 +365,7 @@ build/default/production/_ext/327000265/drv_usart_static_byte_model.o: \
 
 ../src/system_config/default/framework/driver/oc/drv_oc_static.h:
 
-../src/system_config/default/framework/system/devcon/sys_devcon.h:
+../../../../../../framework/system/devcon/sys_devcon.h:
 
 ../../../../../../framework/system/system.h:
 
